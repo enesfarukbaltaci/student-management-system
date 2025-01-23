@@ -30,8 +30,8 @@ public class StudentManagementRunner {
                     System.out.print("Enter student name: ");
                     name = scanner.nextLine();
                     System.out.print("Enter grade: ");
-                    int grade = scanner.nextInt();
-                    studentService.recordGrade(name, grade);
+                    String gradesInput = scanner.nextLine();
+                    studentService.recordGrade(name, gradesInput);
                     break;
 
                 case 3:

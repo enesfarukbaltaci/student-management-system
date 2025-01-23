@@ -20,15 +20,26 @@ public class StudentService {
         return true;
     }
 
-    public boolean recordGrade(String name, int grade) {
+    public boolean recordGrade(String name, String gradesInput) {
         Student student = students.get(name);
         if (student == null) {
             System.out.println("Error: Student not found.");
             return false;
         }
-        student.addGrade(grade);
-        System.out.println("Grade recorded for " + name);
-        return true;
+
+        try {
+            // Split the input string by commas, trim spaces, and convert each to an integer
+            String[] gradesArray = gradesInput.split(",");
+            for (String gradeStr : gradesArray) {
+                int grade = Integer.parseInt(gradeStr.trim());
+                student.addGrade(grade);
+            }
+            System.out.println("Grades recorded for " + name);
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Invalid grade input. Please enter numbers only.");
+            return false;
+        }
     }
 
     public void displayAllStudents() {
@@ -56,4 +67,5 @@ public class StudentService {
             System.out.println("No students have an average grade above " + threshold);
         }
     }
+
 }
